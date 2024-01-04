@@ -1,0 +1,37 @@
+{% extends "./plantilla.html" %}
+{% block contenido %}
+{% load static %}
+
+<div class="row">
+  <div class="col-md-2">
+
+  </div>
+  <div class="col-md-8">
+    <form class="" action="/procesarinformacionEstado/" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="codigo_es_va" value="{{estadocivil.codigo_es_va}}">
+        <input type="text" name="nombre_es_va" value="{{estadocivil.nombre_es_va}}" id="nombre_es_va" placeholder="Ingrese el nombre" class="form-control" required>
+        <input type="text" name="descripcion_va" value="{{estadocivil.descripcion_va}}" id="descripcion_va" placeholder="Ingrese la descripción" class="form-control" required>
+        <input type="date" name="fecha_creacion_va" value="{{estadocivil.fecha_creacion_va|date:'Y-m-d'}}" id="fecha_creacion_va" placeholder="Ingrese la fecha de creación" class="form-control" required>
+        <input type="date" name="fecha_modificacion_va" value="{{estadocivil.fecha_modificacion_va|date:'Y-m-d'}}" id="fecha_modificacion_va" placeholder="Ingrese la fecha de modificación" class="form-control" required>
+         <input type="text" name="autor_va" value="{{estadocivil.autor_va}}" id="autor_va" placeholder="Ingrese el autor" class="form-control" required>
+         <br>
+         <center>
+           <button type="submit" name="button" class="btn btn-primary">&nbsp;&nbsp;&nbsp;Guardar&nbsp;&nbsp;&nbsp;</button>
+           <button type="reset" name="button" class="btn btn-warning">&nbsp;&nbsp;&nbsp;Cancelar&nbsp;&nbsp;&nbsp;</button>
+
+         </center>
+
+
+      </form>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+  {% endblock %}

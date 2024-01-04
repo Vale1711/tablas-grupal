@@ -1,0 +1,85 @@
+{% extends "./plantilla.html" %}
+{% block contenido %}
+<div class="row">
+   <div class="col-md-5">
+     <form class="" action="/guardarMedicamento/" method="post">
+         {% csrf_token %}
+         <input type="text" name="nombre_me_va" value="" id="nombre_me_va" placeholder="Ingrese el nombre" class="form-control" required>
+         <input type="text" name="descripcion_me_va" value="" id="descripcion_me_va" placeholder="Ingrese la descripción" class="form-control" required>
+         <input type="text" name="fabricante_va" value="" id="fabricante_va" placeholder="Ingrese el fabricante" class="form-control" required>
+          <input type="text" name="precio_va" value="" id="precio_va" placeholder="Ingrese el precio" class="form-control" required>
+          <input type="date" name="fecha_caducidad_va" value="" id="fecha_caducidad_va" placeholder="Ingrese la fecha de caducidad" class="form-control" required>
+          <br>
+          <center>
+            <button type="submit" name="button" class="btn btn-primary">&nbsp;&nbsp;&nbsp;Guardar&nbsp;&nbsp;&nbsp;</button>
+            <button type="reset" name="button" class="btn btn-warning">&nbsp;&nbsp;&nbsp;Cancelar&nbsp;&nbsp;&nbsp;</button>
+
+          </center>
+
+
+       </form>
+   </div>
+   <div class="col-md-7">
+     <h2>Medicamento</h2>
+ <table class="table table-striped">
+     <thead>
+         <tr>
+             <th>Código</th>
+             <th>Nombre</th>
+             <th>Descripción</th>
+             <th>Fabricante</th>
+             <th>Precio</th>
+             <th>Fecha de Caducidad</th>
+             <th></th>
+         </tr>
+     </thead>
+     <tbody>
+         {% for medicamento in medicamentos %}
+             <tr>
+                 <td>{{ medicamento.codigo_me_va }}</td>
+                 <td>{{ medicamento.nombre_me_va }}</td>
+                 <td>{{ medicamento.descripcion_me_va }}</td>
+                 <td>{{ medicamento.fabricante_va }}</td>
+                 <td>{{ medicamento.precio_va }}</td>
+                 <td>{{ medicamento.fecha_caducidad_va }}</td>
+                 <td>
+                 <a href="/editarMedicamento/{{medicamento.codigo_me_va}}" class="btn btn-warning">Editar</a>
+                  <a href="javascript: void(0)" onclick="eliminarMedicamento('/eliminarMedicamento/{{medicamento.codigo_me_va}}');" class="btn btn-danger">Eliminar</a>
+           </td>
+             </tr>
+         {% endfor %}
+     </tbody>
+ </table>
+   </div>
+</div>
+
+<script type="text/javascript">
+        function eliminarMedicamento(url){
+          iziToast.question({
+              timeout: 15000,
+              close: true,
+              overlay: true,
+              displayMode: 'once',
+              id: 'question',
+              zindex: 999,
+              title: 'CONFIRMACIÓN',
+              message: '¿Está seguro de eliminar el cliente seleccionado?',
+              position: 'center',
+              buttons: [
+                  ['<button><b>SI</b></button>', function (instance, toast) {
+                      instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                      window.location.href=url;
+                  }, true],
+                  ['<button>NO</button>', function (instance, toast) {
+
+                      instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+
+                  }],
+              ]
+          });
+        }
+      </script>
+
+
+
+{% endblock %}

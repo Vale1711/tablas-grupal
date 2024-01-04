@@ -1,0 +1,37 @@
+{% extends "./plantilla.html" %}
+{% block contenido %}
+{% load static %}
+
+<div class="row">
+  <div class="col-md-2">
+
+  </div>
+  <div class="col-md-8">
+    <form class="" action="/procesarinformacionPais/" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="codigo_pa_va" value="{{pais.codigo_pa_va}}">
+        <input type="text" name="nombre_pa_va" value="{{pais.nombre_pa_va}}" id="nombre_pa_va" placeholder="Ingrese el nombre" class="form-control" required>
+        <input type="text" name="capital_va" value="{{pais.capital_va}}" id="capital_va" placeholder="Ingrese la capital" class="form-control" required>
+        <input type="text" name="poblacion_va" value="{{pais.poblacion_va}}" id="poblacion_va" placeholder="Ingrese la Poblacion" class="form-control" required>
+        <input type="text" name="idioma_va" value="{{pais.idioma_va}}" id="idioma_va" placeholder="Ingrese el idioma" class="form-control" required>
+         <input type="text" name="moneda_va" value="{{pais.moneda_va}}" id="moneda_va" placeholder="Ingrese la moneda" class="form-control" required>
+         <br>
+         <center>
+           <button type="submit" name="button" class="btn btn-primary">&nbsp;&nbsp;&nbsp;Guardar&nbsp;&nbsp;&nbsp;</button>
+           <button type="reset" name="button" class="btn btn-warning">&nbsp;&nbsp;&nbsp;Cancelar&nbsp;&nbsp;&nbsp;</button>
+
+         </center>
+
+
+      </form>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+  {% endblock %}

@@ -1,0 +1,37 @@
+{% extends "./plantilla.html" %}
+{% block contenido %}
+{% load static %}
+
+<div class="row">
+  <div class="col-md-2">
+
+  </div>
+  <div class="col-md-8">
+    <form class="" action="/procesarinformacionAtencion/" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="codigo_ti_va" value="{{tipoatencion.codigo_ti_va}}">
+        <input type="text" name="nombre_ti_va" value="{{tipoatencion.nombre_ti_va}}" id="nombre_ti_va" placeholder="Ingrese el nombre" class="form-control" required>
+        <input type="text" name="descripcion_ti_va" value="{{tipoatencion.descripcion_ti_va}}" id="descripcion_ti_va" placeholder="Ingrese la descripcion" class="form-control" required>
+        <input type="text" name="duracion_va" value="{{tipoatencion.duracion_va}}" id="duracion_va" placeholder="Ingrese la duracion" class="form-control" required>
+        <input type="text" name="costo_va" value="{{tipoatencion.costo_va}}" id="costo_va" placeholder="Ingrese el costo" class="form-control" required>
+         <input type="text" name="personal_asignado_va" value="{{tipoatencion.personal_asignado_va}}" id="personal_asignado_va" placeholder="Ingrese el personal asignado" class="form-control" required>
+         <br>
+         <center>
+           <button type="submit" name="button" class="btn btn-primary">&nbsp;&nbsp;&nbsp;Guardar&nbsp;&nbsp;&nbsp;</button>
+           <button type="reset" name="button" class="btn btn-warning">&nbsp;&nbsp;&nbsp;Cancelar&nbsp;&nbsp;&nbsp;</button>
+
+         </center>
+
+
+      </form>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+  {% endblock %}

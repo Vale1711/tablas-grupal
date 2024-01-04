@@ -1,0 +1,85 @@
+{% extends "./plantilla.html" %}
+{% block contenido %}
+<div class="row">
+   <div class="col-md-5">
+     <form class="" action="/guardarPais/" method="post">
+         {% csrf_token %}
+         <input type="text" name="nombre_pa_va" value="" id="nombre_pa_va" placeholder="Ingrese el nombre" class="form-control" required>
+         <input type="text" name="capital_va" value="" id="capital_va" placeholder="Ingrese la capital" class="form-control" required>
+         <input type="text" name="poblacion_va" value="" id="poblacion_va" placeholder="Ingrese la Poblacion" class="form-control" required>
+         <input type="text" name="idioma_va" value="" id="idioma_va" placeholder="Ingrese el idioma" class="form-control" required>
+          <input type="text" name="moneda_va" value="" id="moneda_va" placeholder="Ingrese la moneda" class="form-control" required>
+          <br>
+          <center>
+            <button type="submit" name="button" class="btn btn-primary">&nbsp;&nbsp;&nbsp;Guardar&nbsp;&nbsp;&nbsp;</button>
+            <button type="reset" name="button" class="btn btn-warning">&nbsp;&nbsp;&nbsp;Cancelar&nbsp;&nbsp;&nbsp;</button>
+
+          </center>
+
+
+       </form>
+   </div>
+   <div class="col-md-7">
+     <h2>Pais</h2>
+ <table class="table table-striped">
+     <thead>
+         <tr>
+             <th>Código</th>
+             <th>Nombre</th>
+             <th>Capital</th>
+             <th>Poblacion</th>
+             <th>Idioma</th>
+             <th>Moneda</th>
+             <th></th>
+         </tr>
+     </thead>
+     <tbody>
+         {% for pais in paises %}
+             <tr>
+                 <td>{{ pais.codigo_pa_va }}</td>
+                 <td>{{ pais.nombre_pa_va }}</td>
+                 <td>{{ pais.capital_va }}</td>
+                 <td>{{ pais.poblacion_va }}</td>
+                 <td>{{ pais.idioma_va }}</td>
+                 <td>{{ pais.moneda_va }}</td>
+                 <td>
+                 <a href="/editarPais/{{pais.codigo_pa_va}}" class="btn btn-warning">Editar</a>
+                  <a href="javascript: void(0)" onclick="eliminarPais('/eliminarPais/{{pais.codigo_pa_va}}');" class="btn btn-danger">Eliminar</a>
+           </td>
+             </tr>
+         {% endfor %}
+     </tbody>
+ </table>
+   </div>
+</div>
+<script type="text/javascript">
+        function eliminarPais(url){
+          iziToast.question({
+              timeout: 15000,
+              close: true,
+              overlay: true,
+              displayMode: 'once',
+              id: 'question',
+              zindex: 999,
+              title: 'CONFIRMACIÓN',
+              message: '¿Está seguro de eliminar el cliente seleccionado?',
+              position: 'center',
+              buttons: [
+                  ['<button><b>SI</b></button>', function (instance, toast) {
+                      instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                      window.location.href=url;
+                  }, true],
+                  ['<button>NO</button>', function (instance, toast) {
+
+                      instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+
+                  }],
+              ]
+          });
+        }
+      </script>
+
+
+
+
+{% endblock %}

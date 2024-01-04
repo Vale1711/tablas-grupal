@@ -1,0 +1,37 @@
+{% extends "./plantilla.html" %}
+{% block contenido %}
+{% load static %}
+
+<div class="row">
+  <div class="col-md-2">
+
+  </div>
+  <div class="col-md-8">
+    <form class="" action="/procesarinformacionRaza/" method="post">
+        {% csrf_token %}
+          <input type="hidden" name="codigo_va" value="{{raza.codigo_va}}">
+        <input type="text" name="nombre_va" value="{{raza.nombre_va}}" id="nombre_va" placeholder="Ingrese el nombre de la raza" class="form-control" required>
+        <input type="text" name="tamano_va" value="{{raza.tamano_va}}" id="tamano_va" placeholder="Ingrese el tamaño" class="form-control" required>
+        <input type="text" name="alimentacion_va" value="{{raza.alimentacion_va}}" id="alimentacion_va" placeholder="Ingrese la alimentación" class="form-control" required>
+        <input type="text" name="color_va" value="{{raza.color_va}}" id="color_va" placeholder="Ingrese el color" class="form-control" required>
+         <input type="text" name="temperamento_va" value="{{raza.temperamento_va}}" id="temperamento_va" placeholder="Ingrese el temperamento" class="form-control" required>
+         <br>
+         <center>
+           <button type="submit" name="button" class="btn btn-primary">&nbsp;&nbsp;&nbsp;Guardar&nbsp;&nbsp;&nbsp;</button>
+           <button type="reset" name="button" class="btn btn-warning">&nbsp;&nbsp;&nbsp;Cancelar&nbsp;&nbsp;&nbsp;</button>
+
+         </center>
+
+
+      </form>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+  {% endblock %}

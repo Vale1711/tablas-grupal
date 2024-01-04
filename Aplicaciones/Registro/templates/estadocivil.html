@@ -1,0 +1,85 @@
+{% extends "./plantilla.html" %}
+{% block contenido %}
+<div class="row">
+   <div class="col-md-5">
+     <form class="" action="/guardarEstado/" method="post">
+         {% csrf_token %}
+         <input type="text" name="nombre_es_va" value="" id="nombre_es_va" placeholder="Ingrese el nombre" class="form-control" required>
+         <input type="text" name="descripcion_va" value="" id="descripcion_va" placeholder="Ingrese la descripción" class="form-control" required>
+         <input type="date" name="fecha_creacion_va" value="" id="fecha_creacion_va" placeholder="Ingrese la fecha de creación" class="form-control" required>
+         <input type="date" name="fecha_modificacion_va" value="" id="fecha_modificacion_va" placeholder="Ingrese la fecha de modificación" class="form-control" required>
+          <input type="text" name="autor_va" value="" id="autor_va" placeholder="Ingrese el autor" class="form-control" required>
+          <br>
+          <center>
+            <button type="submit" name="button" class="btn btn-primary">&nbsp;&nbsp;&nbsp;Guardar&nbsp;&nbsp;&nbsp;</button>
+            <button type="reset" name="button" class="btn btn-warning">&nbsp;&nbsp;&nbsp;Cancelar&nbsp;&nbsp;&nbsp;</button>
+
+          </center>
+
+
+       </form>
+   </div>
+   <div class="col-md-7">
+     <h2>Estado Civil</h2>
+ <table class="table table-striped">
+     <thead>
+         <tr>
+             <th>Código</th>
+             <th>Nombre</th>
+             <th>Descripción</th>
+             <th>Fecha de Creación</th>
+             <th>Fecha de Modificación</th>
+             <th>Autor</th>
+             <th></th>
+         </tr>
+     </thead>
+     <tbody>
+         {% for estadocivil in estadociviles %}
+             <tr>
+                 <td>{{ estadocivil.codigo_es_va }}</td>
+                 <td>{{ estadocivil.nombre_es_va }}</td>
+                 <td>{{ estadocivil.descripcion_va }}</td>
+                 <td>{{ estadocivil.fecha_creacion_va }}</td>
+                 <td>{{ estadocivil.fecha_modificacion_va }}</td>
+                 <td>{{ estadocivil.autor_va }}</td>
+                 <td>
+                 <a href="/editarEstado/{{estadocivil.codigo_es_va}}" class="btn btn-warning">Editar</a>
+                  <a href="javascript: void(0)" onclick="eliminarEstado('/eliminarEstado/{{estadocivil.codigo_es_va}}');" class="btn btn-danger">Eliminar</a>
+           </td>
+             </tr>
+         {% endfor %}
+     </tbody>
+ </table>
+   </div>
+</div>
+<script type="text/javascript">
+        function eliminarEstado(url){
+          iziToast.question({
+              timeout: 15000,
+              close: true,
+              overlay: true,
+              displayMode: 'once',
+              id: 'question',
+              zindex: 999,
+              title: 'CONFIRMACIÓN',
+              message: '¿Está seguro de eliminar el cliente seleccionado?',
+              position: 'center',
+              buttons: [
+                  ['<button><b>SI</b></button>', function (instance, toast) {
+                      instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                      window.location.href=url;
+                  }, true],
+                  ['<button>NO</button>', function (instance, toast) {
+
+                      instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+
+                  }],
+              ]
+          });
+        }
+      </script>
+
+
+
+
+{% endblock %}

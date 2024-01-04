@@ -1,0 +1,85 @@
+{% extends "./plantilla.html" %}
+{% block contenido %}
+<div class="row">
+   <div class="col-md-5">
+     <form class="" action="/guardarAtencion/" method="post">
+         {% csrf_token %}
+         <input type="text" name="nombre_ti_va" value="" id="nombre_ti_va" placeholder="Ingrese el nombre" class="form-control" required>
+         <input type="text" name="descripcion_ti_va" value="" id="descripcion_ti_va" placeholder="Ingrese la descripcion" class="form-control" required>
+         <input type="text" name="duracion_va" value="" id="duracion_va" placeholder="Ingrese la duracion" class="form-control" required>
+         <input type="text" name="costo_va" value="" id="costo_va" placeholder="Ingrese el costo" class="form-control" required>
+          <input type="text" name="personal_asignado_va" value="" id="personal_asignado_va" placeholder="Ingrese el personal asignado" class="form-control" required>
+          <br>
+          <center>
+            <button type="submit" name="button" class="btn btn-primary">&nbsp;&nbsp;&nbsp;Guardar&nbsp;&nbsp;&nbsp;</button>
+            <button type="reset" name="button" class="btn btn-warning">&nbsp;&nbsp;&nbsp;Cancelar&nbsp;&nbsp;&nbsp;</button>
+
+          </center>
+
+
+       </form>
+   </div>
+   <div class="col-md-7">
+     <h2>Tipo de Atención</h2>
+ <table class="table table-striped">
+     <thead>
+         <tr>
+             <th>Código</th>
+             <th>Nombre</th>
+             <th>Descripción</th>
+             <th>Duracion de la Consulta</th>
+             <th>Costo</th>
+             <th>Personal Asignado</th>
+             <th></th>
+         </tr>
+     </thead>
+     <tbody>
+         {% for tipoatencion in tiposatencion %}
+             <tr>
+                 <td>{{ tipoatencion.codigo_ti_va }}</td>
+                 <td>{{ tipoatencion.nombre_ti_va }}</td>
+                 <td>{{ tipoatencion.descripcion_ti_va }}</td>
+                 <td>{{ tipoatencion.duracion_va }}</td>
+                 <td>{{ tipoatencion.costo_va }}</td>
+                 <td>{{ tipoatencion.personal_asignado_va }}</td>
+                 <td>
+                 <a href="/editarAtencion/{{tipoatencion.codigo_ti_va}}" class="btn btn-warning">Editar</a>
+                  <a href="javascript: void(0)" onclick="eliminarAtencion('/eliminarAtencion/{{tipoatencion.codigo_ti_va}}');" class="btn btn-danger">Eliminar</a>
+           </td>
+             </tr>
+         {% endfor %}
+     </tbody>
+ </table>
+   </div>
+</div>
+<script type="text/javascript">
+        function eliminarAtencion(url){
+          iziToast.question({
+              timeout: 15000,
+              close: true,
+              overlay: true,
+              displayMode: 'once',
+              id: 'question',
+              zindex: 999,
+              title: 'CONFIRMACIÓN',
+              message: '¿Está seguro de eliminar el cliente seleccionado?',
+              position: 'center',
+              buttons: [
+                  ['<button><b>SI</b></button>', function (instance, toast) {
+                      instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                      window.location.href=url;
+                  }, true],
+                  ['<button>NO</button>', function (instance, toast) {
+
+                      instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+
+                  }],
+              ]
+          });
+        }
+      </script>
+
+
+
+
+{% endblock %}

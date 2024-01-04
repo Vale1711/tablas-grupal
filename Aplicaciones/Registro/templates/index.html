@@ -1,0 +1,86 @@
+
+    {% extends "./plantilla.html" %}
+    {% block contenido %}
+    <div class="row">
+       <div class="col-md-5">
+         <form class="" action="/guardarRaza/" method="post">
+             {% csrf_token %}
+             <input type="text" name="nombre_va" value="" id="nombre_va" placeholder="Ingrese el nombre de la raza" class="form-control" required>
+             <input type="text" name="tamano_va" value="" id="tamano_va" placeholder="Ingrese el tamaño" class="form-control" required>
+             <input type="text" name="alimentacion_va" value="" id="alimentacion_va" placeholder="Ingrese la alimentación" class="form-control" required>
+             <input type="text" name="color_va" value="" id="color_va" placeholder="Ingrese el color" class="form-control" required>
+              <input type="text" name="temperamento_va" value="" id="temperamento_va" placeholder="Ingrese el temperamento" class="form-control" required>
+              <br>
+              <center>
+                <button type="submit" name="button" class="btn btn-primary">&nbsp;&nbsp;&nbsp;Guardar&nbsp;&nbsp;&nbsp;</button>
+                <button type="reset" name="button" class="btn btn-warning">&nbsp;&nbsp;&nbsp;Cancelar&nbsp;&nbsp;&nbsp;</button>
+
+              </center>
+
+
+           </form>
+       </div>
+       <div class="col-md-7">
+         <h2>Razas</h2>
+     <table class="table table-striped">
+         <thead>
+             <tr>
+                 <th>Código</th>
+                 <th>Nombre</th>
+                 <th>Tamaño</th>
+                 <th>Alimentacion</th>
+                 <th>Color</th>
+                 <th>Temperamento</th>
+                 <th></th>
+             </tr>
+         </thead>
+         <tbody>
+             {% for raza in razas %}
+                 <tr>
+                     <td>{{ raza.codigo_va }}</td>
+                     <td>{{ raza.nombre_va }}</td>
+                     <td>{{ raza.tamano_va }}</td>
+                     <td>{{ raza.alimentacion_va }}</td>
+                     <td>{{ raza.color_va }}</td>
+                     <td>{{ raza.temperamento_va }}</td>
+                     <td>
+                     <a href="/editarRaza/{{raza.codigo_va}}" class="btn btn-warning">Editar</a>
+                      <a  href="javascript: void(0)" onclick="eliminarRaza('/eliminarRaza/{{raza.codigo_va}}');" class="btn btn-danger">Eliminar</a>
+               </td>
+                 </tr>
+             {% endfor %}
+         </tbody>
+     </table>
+       </div>
+    </div>
+    <script type="text/javascript">
+            function eliminarRaza(url){
+              iziToast.question({
+                  timeout: 15000,
+                  close: true,
+                  overlay: true,
+                  displayMode: 'once',
+                  id: 'question',
+                  zindex: 999,
+                  title: 'CONFIRMACIÓN',
+                  message: '¿Está seguro de eliminar el cliente seleccionado?',
+                  position: 'center',
+                  buttons: [
+                      ['<button><b>SI</b></button>', function (instance, toast) {
+                          instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                          window.location.href=url;
+                      }, true],
+                      ['<button>NO</button>', function (instance, toast) {
+
+                          instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+
+                      }],
+                  ]
+              });
+            }
+          </script>
+
+
+
+
+  {% endblock %}

@@ -1,0 +1,34 @@
+{% extends "./plantilla.html" %}
+{% block contenido %}
+{% load static %}
+
+<div class="row">
+  <div class="col-md-2">
+
+  </div>
+  <div class="col-md-8">
+    <form class="" action="/procesarinformacionMedicamento/" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="codigo_me_va" value="{{medicamento.codigo_me_va}}">
+        <input type="text" name="nombre_me_va" value="{{medicamento.nombre_me_va}}" id="nombre_me_va" placeholder="Ingrese el nombre" class="form-control" required>
+        <input type="text" name="descripcion_me_va" value="{{medicamento.descripcion_me_va}}" id="descripcion_me_va" placeholder="Ingrese la descripción" class="form-control" required>
+        <input type="text" name="fabricante_va" value="{{medicamento.fabricante_va}}" id="fabricante_va" placeholder="Ingrese el fabricante" class="form-control" required>
+         <input type="text" name="precio_va" value="{{medicamento.precio_va}}" id="precio_va" placeholder="Ingrese el precio" class="form-control" required>
+         <input type="date" name="fecha_caducidad_va" value="{{medicamento.fecha_caducidad_va|date:'Y-m-d'}}" id="fecha_caducidad_va" placeholder="Ingrese la fecha de caducidad" class="form-control" required>
+         <br>
+         <center>
+           <button type="submit" name="button" class="btn btn-primary">&nbsp;&nbsp;&nbsp;Guardar&nbsp;&nbsp;&nbsp;</button>
+           <button type="reset" name="button" class="btn btn-warning">&nbsp;&nbsp;&nbsp;Cancelar&nbsp;&nbsp;&nbsp;</button>
+
+         </center>
+
+
+      </form>
+  </div>
+
+</div>
+
+
+
+
+  {% endblock %}
